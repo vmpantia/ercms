@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERCMS.Domain", "ERCMS.Domain\ERCMS.Domain.csproj", "{EEE1C09F-41AF-4C4F-B4DF-85DFBF831B6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERCMS.Infrastructure", "ERCMS.Infrastructure\ERCMS.Infrastructure.csproj", "{EAB609A4-3400-4798-A453-CE4C24B622F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERCMS.Application", "ERCMS.Application\ERCMS.Application.csproj", "{95E3BF00-E376-4459-B4B6-380358593996}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERCMS.Api", "ERCMS.Api\ERCMS.Api.csproj", "{330C789C-53ED-407B-9A69-081850FA72DA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EEE1C09F-41AF-4C4F-B4DF-85DFBF831B6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEE1C09F-41AF-4C4F-B4DF-85DFBF831B6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEE1C09F-41AF-4C4F-B4DF-85DFBF831B6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEE1C09F-41AF-4C4F-B4DF-85DFBF831B6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAB609A4-3400-4798-A453-CE4C24B622F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAB609A4-3400-4798-A453-CE4C24B622F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAB609A4-3400-4798-A453-CE4C24B622F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAB609A4-3400-4798-A453-CE4C24B622F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95E3BF00-E376-4459-B4B6-380358593996}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95E3BF00-E376-4459-B4B6-380358593996}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95E3BF00-E376-4459-B4B6-380358593996}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95E3BF00-E376-4459-B4B6-380358593996}.Release|Any CPU.Build.0 = Release|Any CPU
+		{330C789C-53ED-407B-9A69-081850FA72DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{330C789C-53ED-407B-9A69-081850FA72DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{330C789C-53ED-407B-9A69-081850FA72DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{330C789C-53ED-407B-9A69-081850FA72DA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
