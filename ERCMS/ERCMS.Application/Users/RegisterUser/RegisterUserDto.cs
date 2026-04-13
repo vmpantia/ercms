@@ -1,3 +1,4 @@
+using ERCMS.Application.Authentication;
 using ERCMS.Domain.Entities;
 using ERCMS.Domain.Interfaces;
 
@@ -19,7 +20,7 @@ public sealed class RegisterUserDto : IMappable<User>
             Id = Guid.NewGuid(),
             Username = Username,
             Email = Email,
-            Password = Password,
+            Password = PasswordHasher.Hash(Password),
             FirstName = FirstName,
             MiddleName = MiddleName,
             LastName = LastName

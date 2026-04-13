@@ -11,29 +11,23 @@ public static class DependencyInjection
 {
     extension(IServiceCollection services)
     {
-        public IServiceCollection AddInfrastructure(IConfiguration configuration)
+        public void AddInfrastructure(IConfiguration configuration)
         {
-            services.AddDbContexts(configuration)
-                    .AddRepositories();
-            
-            return services;
+            services.AddDbContexts(configuration);
+            services.AddRepositories();
         }
         
-        private IServiceCollection AddDbContexts(IConfiguration configuration)
+        private void AddDbContexts(IConfiguration configuration)
         {
             services.AddDbContext<ErcmsDbContext>(opt => opt
                 .UseSqlServer(configuration
                     .GetConnectionString("Migration")));
-
-            return services;
         }
 
-        private IServiceCollection AddRepositories()
+        private void AddRepositories()
         {
-            services.AddScoped<IUserRepository, UserRepository>()
-                .AddScoped<IStudentRepository, StudentRepository>();
-            
-            return services;
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IStudentRepository, StudentRepository>();
         }
     }
 }

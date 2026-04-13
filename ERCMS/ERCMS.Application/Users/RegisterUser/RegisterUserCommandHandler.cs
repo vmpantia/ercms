@@ -8,7 +8,7 @@ public sealed class RegisterUserCommandHandler(IUserRepository userRepository) :
 {
     public async Task<Result> HandleAsync(RegisterUserCommand request, CancellationToken cancellationToken = default)
     {
-        var entity = request.User.Map();
+        var entity = request.Register.Map();
         
         var user = await userRepository.CreateAsync(entity, cancellationToken);
 

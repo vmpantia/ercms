@@ -1,7 +1,14 @@
+using System.Text;
+using ERCMS.Application.Authentication;
 using ERCMS.Application.Users.GetUsers;
+using ERCMS.Application.Users.LoginUser;
 using ERCMS.Application.Users.RegisterUser;
+using ERCMS.Domain.Interfaces.Authentication;
 using ERCMS.Domain.Requests;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 
 namespace ERCMS.Application;
 
@@ -9,19 +16,38 @@ public static class DependencyInjection
 {
     extension(IServiceCollection services)
     {
-        public IServiceCollection AddApplication()
+        public void AddApplication(IConfiguration configuration)
         {
+            services.AddCustomAuthentication(configuration);
             services.AddRequestHandlers();
+        }
+        
+        private void AddCustomAuthentication(IConfiguration configuration)
+        {
+            var authenticationSetting = AuthenticationSetting.Initialize(configuration);
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(opt =>
+                {
+                    opt.RequireHttpsMetadata = true;
+                    opt.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationSetting.AccessToken.Secret)),
+                        ValidIssuer = authenticationSetting.AccessToken.Issuer,
+                        ValidAudience = authenticationSetting.AccessToken.Audience,
+                        ClockSkew = TimeSpan.Zero
+                    };
+                });
             
-            return services;
+            services.AddSingleton(authenticationSetting);
+            services.AddScoped<ITokenProvider, TokenProvider>();
         }
 
-        private IServiceCollection AddRequestHandlers()
+        private void AddRequestHandlers()
         {
-            services.AddScoped<IRequestHandler<GetUsersQuery>, GetUsersQueryHandler>()
-                .AddScoped<IRequestHandler<RegisterUserCommand>, RegisterUserCommandHandler>();
-            
-            return services;
+            services.AddScoped<IRequestHandler<LoginUserCommand>, LoginUserCommandHandler>();
+            services.AddScoped<IRequestHandler<RegisterUserCommand>, RegisterUserCommandHandler>();
+            services.AddScoped<IRequestHandler<GetUsersQuery>, GetUsersQueryHandler>();
         }
+
     }
 }

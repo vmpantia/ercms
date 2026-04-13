@@ -2,4 +2,4 @@ using ERCMS.Domain.Requests;
 
 namespace ERCMS.Application.Users.RegisterUser;
 
-public record RegisterUserCommand(RegisterUserDto User) : ICommand;
+public sealed record RegisterUserCommand(RegisterUserDto Register) : ICommand;
