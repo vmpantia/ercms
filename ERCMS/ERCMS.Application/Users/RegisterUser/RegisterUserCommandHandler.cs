@@ -15,6 +15,6 @@ public sealed class RegisterUserCommandHandler(IValidator<RegisterUserDto> valid
         
         var user = await userRepository.CreateAsync(entity, cancellationToken);
 
-        return Result.Success(user);
+        return Result.Success(user.Map());
     }
 }
