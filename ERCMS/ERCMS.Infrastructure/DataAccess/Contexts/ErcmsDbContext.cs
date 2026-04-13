@@ -7,6 +7,9 @@ public sealed class ErcmsDbContext(DbContextOptions<ErcmsDbContext> options) : D
 {
     public DbSet<User> Users => Set<User>();
     public DbSet<Student> Students => Set<Student>();
+    public DbSet<Contact> Contacts => Set<Contact>();
+    public DbSet<EmailAddress> EmailAddresses => Set<EmailAddress>();
+    public DbSet<Address> Addresses => Set<Address>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -4,6 +4,7 @@ using ERCMS.Infrastructure.DataAccess.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ERCMS.Infrastructure.DataAccess.Migrations
 {
     [DbContext(typeof(ErcmsDbContext))]
-    partial class ErcmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260413102918_AddInitialMigration")]
+    partial class AddInitialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
