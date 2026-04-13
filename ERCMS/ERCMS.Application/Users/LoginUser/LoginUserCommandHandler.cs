@@ -4,13 +4,16 @@ using ERCMS.Domain.Interfaces.Repositories;
 using ERCMS.Domain.Requests;
 using ERCMS.Domain.Responses;
 using ERCMS.Domain.Responses.Errors;
+using FluentValidation;
 
 namespace ERCMS.Application.Users.LoginUser;
 
-public sealed class LoginUserCommandHandler(IUserRepository userRepository, ITokenProvider tokenProvider) : IRequestHandler<LoginUserCommand>
+public sealed class LoginUserCommandHandler(IValidator<LoginUserDto> validator, IUserRepository userRepository, ITokenProvider tokenProvider) : IRequestHandler<LoginUserCommand>
 {
     public async Task<Result> HandleAsync(LoginUserCommand request, CancellationToken cancellationToken = default)
     {
+        await validator.ValidateAndThrowAsync(request.Login, cancellationToken);
+        
         var user = await userRepository.GetOneAsync(u =>
                 u.Username == request.Login.UsernameOrEmail || u.Email == request.Login.UsernameOrEmail,
             cancellationToken);

@@ -1,6 +1,6 @@
 using ERCMS.Api;
+using ERCMS.Api.Endpoints;
 using ERCMS.Api.Exceptions;
-using ERCMS.Api.Users;
 using ERCMS.Application;
 using ERCMS.Infrastructure;
 
@@ -25,10 +25,6 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
-var api = app
-    .MapGroup("/api")
-    .AddEndpointFilter<ExceptionEndpointFilter>();
-
-UserEndpoints.Map(api);
+app.MapApiEndpoints();
 
 app.Run();

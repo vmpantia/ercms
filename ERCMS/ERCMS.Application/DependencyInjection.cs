@@ -5,6 +5,7 @@ using ERCMS.Application.Users.LoginUser;
 using ERCMS.Application.Users.RegisterUser;
 using ERCMS.Domain.Interfaces.Authentication;
 using ERCMS.Domain.Requests;
+using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +19,7 @@ public static class DependencyInjection
     {
         public void AddApplication(IConfiguration configuration)
         {
+            services.AddValidatorsFromAssembly(typeof(DependencyInjection).Assembly);
             services.AddCustomAuthentication(configuration);
             services.AddRequestHandlers();
         }
