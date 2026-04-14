@@ -1,10 +1,11 @@
+using ERCMS.Domain.Interfaces.Repositories;
 using FluentValidation;
 
 namespace ERCMS.Application.Features.Students.CreateStudent;
 
 public sealed class CreateStudentValidator : AbstractValidator<CreateStudentDto>
 {
-    public CreateStudentValidator()
+    public CreateStudentValidator(IStudentRepository studentRepository)
     {
         RuleFor(csd => csd.FirstName).NotEmpty();
         RuleFor(csd => csd.LastName).NotEmpty();
@@ -16,5 +17,13 @@ public sealed class CreateStudentValidator : AbstractValidator<CreateStudentDto>
         RuleFor(csd => csd.Address.Province).NotEmpty();
         RuleFor(csd => csd.Address.Country).NotEmpty();
         RuleFor(csd => csd.Address.ZipCode).GreaterThan(0);
+        
+        RuleFor(csd => csd)
+            .MustAsync(async (csd, ct) =>
+            {
+                var student = await studentRepository.GetOneAsync(s => s.FirstName == csd.FirstName && s.LastName == csd.LastName, ct);
+                return student == null;
+            })
+            .WithMessage("Student first name and last name is already exist.");
     }
 }

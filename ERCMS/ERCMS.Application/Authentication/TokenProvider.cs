@@ -21,9 +21,9 @@ public sealed class TokenProvider(AuthenticationSetting authenticationSetting, I
             var accessTokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity([
-                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                    new Claim(ClaimTypes.Upn, user.Id.ToString()),
                     new Claim(ClaimTypes.Name, $"{user.FirstName} {user.LastName}"),
-                    new Claim(ClaimTypes.Upn, user.Email)
+                    new Claim(ClaimTypes.Email, user.Email)
                 ]),
                 Expires =  expiration,
                 SigningCredentials = credentials,

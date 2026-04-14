@@ -13,6 +13,7 @@ public static class DependencyInjection
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGenWithAuth();
+            services.AddHttpContextAccessor();
         }
         
         private void AddSwaggerGenWithAuth()
