@@ -16,13 +16,13 @@ public static class AuthEndpoints
         auth.MapPost("/register", RegisterAsync).RequireAuthorization();
     }
 
-    private static async Task<IResult> LoginAsync([FromBody] LoginUserDto request, IRequestHandler<LoginUserCommand> handler, CancellationToken ct)
+    private static async Task<IResult> LoginAsync([FromBody] LoginUserDto request, [FromServices] IRequestHandler<LoginUserCommand> handler, CancellationToken ct)
     {
         var result = await handler.HandleAsync(new LoginUserCommand(request), ct);
         return result.MatchToResults();
     }
 
-    private static async Task<IResult> RegisterAsync([FromBody] RegisterUserDto request, IRequestHandler<RegisterUserCommand> handler, CancellationToken ct)
+    private static async Task<IResult> RegisterAsync([FromBody] RegisterUserDto request, [FromServices] IRequestHandler<RegisterUserCommand> handler, CancellationToken ct)
     {
         var result = await handler.HandleAsync(new RegisterUserCommand(request), ct);
         return result.MatchToResults();

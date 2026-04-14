@@ -13,6 +13,6 @@ public sealed class GetUsersQueryHandler(IUserRepository userRepository) : IRequ
             .GetAll()
             .ToListAsync(cancellationToken);
 
-        return Result.Success(users.Select(entity => entity.Map()));
+        return Result.Success(users.Select(u => u.Map()));
     }
 }
