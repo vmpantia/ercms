@@ -1,8 +1,9 @@
 using ERCMS.Application.Authentication;
-using ERCMS.Application.Users.RegisterUser;
+using ERCMS.Application.Features.Users.RegisterUser;
 using ERCMS.Domain.Entities;
+using ERCMS.Domain.Enums;
 
-namespace ERCMS.Application.Users;
+namespace ERCMS.Application.Features.Users;
 
 public static class UserMapping
 {
@@ -16,6 +17,7 @@ public static class UserMapping
             FirstName = entity.FirstName,
             MiddleName = entity.MiddleName,
             LastName = entity.LastName,
+            Status = entity.Status,
             LastModifiedAtUtc = entity.ModifiedAtUtc ?? entity.CreatedAtUc,
             LastModifiedBy = entity.ModifiedBy ?? entity.CreatedBy
         };
@@ -33,7 +35,8 @@ public static class UserMapping
             Password = PasswordHasher.Hash(dto.Password),
             FirstName = dto.FirstName,
             MiddleName = dto.MiddleName,
-            LastName = dto.LastName
+            LastName = dto.LastName,
+            Status = CommonStatus.Enabled
         };
         
         return entity;;

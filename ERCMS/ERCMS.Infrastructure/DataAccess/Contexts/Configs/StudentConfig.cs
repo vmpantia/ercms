@@ -9,5 +9,6 @@ public sealed class StudentConfig : IEntityTypeConfiguration<Student>
     public void Configure(EntityTypeBuilder<Student> builder)
     {
         builder.HasKey(s => s.Id);
+        builder.OwnsOne(s => s.Address);
     }
 }

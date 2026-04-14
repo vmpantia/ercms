@@ -1,8 +1,9 @@
 using System.Text;
 using ERCMS.Application.Authentication;
-using ERCMS.Application.Users.GetUsers;
-using ERCMS.Application.Users.LoginUser;
-using ERCMS.Application.Users.RegisterUser;
+using ERCMS.Application.Features.Students.CreateStudent;
+using ERCMS.Application.Features.Users.GetUsers;
+using ERCMS.Application.Features.Users.LoginUser;
+using ERCMS.Application.Features.Users.RegisterUser;
 using ERCMS.Domain.Interfaces.Authentication;
 using ERCMS.Domain.Requests;
 using FluentValidation;
@@ -49,6 +50,7 @@ public static class DependencyInjection
             services.AddScoped<IRequestHandler<LoginUserCommand>, LoginUserCommandHandler>();
             services.AddScoped<IRequestHandler<RegisterUserCommand>, RegisterUserCommandHandler>();
             services.AddScoped<IRequestHandler<GetUsersQuery>, GetUsersQueryHandler>();
+            services.AddScoped<IRequestHandler<CreateStudentCommand>, CreateStudentCommandHandler>();
         }
 
     }

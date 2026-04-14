@@ -6,7 +6,7 @@ using ERCMS.Domain.Responses;
 using ERCMS.Domain.Responses.Errors;
 using FluentValidation;
 
-namespace ERCMS.Application.Users.LoginUser;
+namespace ERCMS.Application.Features.Users.LoginUser;
 
 public sealed class LoginUserCommandHandler(IValidator<LoginUserDto> validator, IUserRepository userRepository, ITokenProvider tokenProvider) : IRequestHandler<LoginUserCommand>
 {

@@ -1,3 +1,4 @@
+using ERCMS.Domain.Enums;
 using ERCMS.Domain.Interfaces.Entities;
 
 namespace ERCMS.Domain.Entities;
@@ -11,6 +12,7 @@ public sealed class User : IEntity
     public string FirstName { get; set; } = string.Empty;
     public string? MiddleName { get; set; }
     public string LastName { get; set; } = string.Empty;
+    public CommonStatus Status { get; set; }
     
     public DateTimeOffset CreatedAtUc { get; set; }
     public string CreatedBy { get; set; } = string.Empty;

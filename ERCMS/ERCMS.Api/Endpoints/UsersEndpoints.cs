@@ -1,12 +1,12 @@
 using ERCMS.Api.Extensions;
-using ERCMS.Application.Users.GetUsers;
+using ERCMS.Application.Features.Users.GetUsers;
 using ERCMS.Domain.Requests;
 
 namespace ERCMS.Api.Endpoints;
 
 internal static class UsersEndpoints
 {
-    public static void MapUserEndpoints(this RouteGroupBuilder api)
+    public static void MapUsersEndpoints(this RouteGroupBuilder api)
     {
         var users = api
             .MapGroup("/users")

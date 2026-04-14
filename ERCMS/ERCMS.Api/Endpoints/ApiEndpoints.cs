@@ -11,6 +11,7 @@ public static class ApiEndpoints
             .AddEndpointFilter<ExceptionEndpointFilter>();
 
         api.MapAuthEndpoints();
-        api.MapUserEndpoints();
+        api.MapUsersEndpoints();
+        api.MapStudentsEndpoints();
     }
 }

@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace ERCMS.Application.Users.LoginUser;
+namespace ERCMS.Application.Features.Users.LoginUser;
 
 public sealed class LoginUserCommandValidator : AbstractValidator<LoginUserDto>
 {

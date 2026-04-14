@@ -1,4 +1,4 @@
-namespace ERCMS.Application.Users.LoginUser;
+namespace ERCMS.Application.Features.Users.LoginUser;
 
 public sealed class LoginUserDto
 {

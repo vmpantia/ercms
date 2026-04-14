@@ -1,6 +1,6 @@
 using ERCMS.Api.Extensions;
-using ERCMS.Application.Users.LoginUser;
-using ERCMS.Application.Users.RegisterUser;
+using ERCMS.Application.Features.Users.LoginUser;
+using ERCMS.Application.Features.Users.RegisterUser;
 using ERCMS.Domain.Requests;
 using Microsoft.AspNetCore.Mvc;
 

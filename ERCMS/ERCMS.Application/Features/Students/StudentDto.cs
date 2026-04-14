@@ -1,10 +1,9 @@
 using ERCMS.Domain.Enums;
-using ERCMS.Domain.Interfaces.Entities;
 using ERCMS.Domain.Models;
 
-namespace ERCMS.Domain.Entities;
+namespace ERCMS.Application.Features.Students;
 
-public sealed class Student : IEntity
+public class StudentDto
 {
     public Guid Id { get; set; }
     public string FirstName { get; set; } = string.Empty;
@@ -17,11 +16,6 @@ public sealed class Student : IEntity
     public string EmailAddress { get; set; } = string.Empty;
     public Address Address { get; set; } = new();
     public CommonStatus Status { get; set; }
-    
-    public DateTimeOffset CreatedAtUc { get; set; }
-    public string CreatedBy { get; set; } = string.Empty;
-    public DateTimeOffset? ModifiedAtUtc { get; set; }
-    public string? ModifiedBy { get; set; }
-    public DateTimeOffset? DeletedAtUtc { get; set; }
-    public string? DeletedBy { get; set; }
+    public DateTimeOffset LastModifiedAtUtc { get; set; }
+    public required string LastModifiedBy { get; set; }
 }

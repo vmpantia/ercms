@@ -1,4 +1,4 @@
-namespace ERCMS.Application.Users.RegisterUser;
+namespace ERCMS.Application.Features.Users.RegisterUser;
 
 public sealed class RegisterUserDto
 {

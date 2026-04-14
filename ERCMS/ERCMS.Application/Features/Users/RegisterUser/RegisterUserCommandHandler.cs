@@ -3,7 +3,7 @@ using ERCMS.Domain.Requests;
 using ERCMS.Domain.Responses;
 using FluentValidation;
 
-namespace ERCMS.Application.Users.RegisterUser;
+namespace ERCMS.Application.Features.Users.RegisterUser;
 
 public sealed class RegisterUserCommandHandler(IValidator<RegisterUserDto> validator, IUserRepository userRepository) : IRequestHandler<RegisterUserCommand>
 {

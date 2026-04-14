@@ -1,7 +1,7 @@
 using ERCMS.Domain.Interfaces.Repositories;
 using FluentValidation;
 
-namespace ERCMS.Application.Users.RegisterUser;
+namespace ERCMS.Application.Features.Users.RegisterUser;
 
 public sealed class RegisterUserValidator : AbstractValidator<RegisterUserDto>
 {

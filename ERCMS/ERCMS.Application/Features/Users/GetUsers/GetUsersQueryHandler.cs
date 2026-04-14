@@ -3,7 +3,7 @@ using ERCMS.Domain.Requests;
 using ERCMS.Domain.Responses;
 using Microsoft.EntityFrameworkCore;
 
-namespace ERCMS.Application.Users.GetUsers;
+namespace ERCMS.Application.Features.Users.GetUsers;
 
 public sealed class GetUsersQueryHandler(IUserRepository userRepository) : IRequestHandler<GetUsersQuery>
 {
