@@ -19,22 +19,22 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
     
     public IQueryable<TEntity> GetAll()
     {
-        return _table;
+        return _table.AsNoTracking();
     }
 
     public IQueryable<TEntity> GetByExpression(Expression<Func<TEntity, bool>> expression)
     {
-        return _table.Where(expression);
+        return _table.AsNoTracking().Where(expression);
     }
 
     public async Task<TEntity?> GetOneAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken = default)
     {
-        return await _table.SingleOrDefaultAsync(expression, cancellationToken);
+        return await _table.AsNoTracking().SingleOrDefaultAsync(expression, cancellationToken);
     }
 
     public async Task<TEntity?> GetOneAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        return await _table.SingleOrDefaultAsync(e => e.Id == id, cancellationToken);
+        return await _table.AsNoTracking().SingleOrDefaultAsync(e => e.Id == id, cancellationToken);
     }
 
     public async Task<TEntity> CreateAsync(TEntity entity, CancellationToken cancellationToken = default)

@@ -2,11 +2,12 @@ using ERCMS.Domain.Extensions;
 using ERCMS.Domain.Interfaces.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace ERCMS.Infrastructure.DataAccess.Interceptors;
 
-public class AuditEntitiesInterceptor(IHttpContextAccessor httpContextAccessor) : SaveChangesInterceptor
+public sealed class AuditEntitiesInterceptor(IHttpContextAccessor httpContextAccessor) : SaveChangesInterceptor
 {
     public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
     {
@@ -33,20 +34,28 @@ public class AuditEntitiesInterceptor(IHttpContextAccessor httpContextAccessor) 
             var entity = entry.Entity;
             switch (entry.State)
             {
-                case EntityState.Added when entity is ICreatableEntity creatableEntity:
-                    creatableEntity.CreatedAtUc = DateTimeOffset.UtcNow;
-                    creatableEntity.CreatedBy = requestor;
+                case EntityState.Added:
+                    entity.CreatedAtUc = DateTimeOffset.UtcNow;
+                    entity.CreatedBy = requestor;
                     break;
-                case EntityState.Modified when entity is IEditableEntity editableEntity:
-                    editableEntity.ModifiedAtUtc = DateTimeOffset.UtcNow;
-                    editableEntity.ModifiedBy = requestor;
+                case EntityState.Modified:
+                    entity.ModifiedAtUtc = DateTimeOffset.UtcNow;
+                    entity.ModifiedBy = requestor;
                     break;
-                case EntityState.Deleted when entity is IDeletableEntity deletableEntity:
+                case EntityState.Deleted:
                     entry.State = EntityState.Modified;
-                    deletableEntity.DeletedAtUtc = DateTimeOffset.UtcNow;
-                    deletableEntity.DeletedBy = requestor;
+                    MarkUnchangedForOwnedEntries(entry);
+                    entity.DeletedAtUtc = DateTimeOffset.UtcNow;
+                    entity.DeletedBy = requestor;
                     break;
             }
         });
     }
+
+    private void MarkUnchangedForOwnedEntries(EntityEntry<IEntity> entry) =>
+        Parallel.ForEach(entry.References, reference =>
+        {
+            if (reference.TargetEntry?.Metadata.IsOwned() == true)
+                reference.TargetEntry.State = EntityState.Unchanged;
+        });
 }
