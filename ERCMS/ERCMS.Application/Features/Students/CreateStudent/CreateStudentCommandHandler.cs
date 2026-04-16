@@ -5,14 +5,13 @@ using FluentValidation;
 
 namespace ERCMS.Application.Features.Students.CreateStudent;
 
-public sealed class CreateStudentCommandHandler(IValidator<CreateStudentDto> validator, IStudentRepository studentRepository) : IRequestHandler<CreateStudentCommand>
+public sealed class CreateStudentCommandHandler(IValidator<CreateStudentCommand> validator, IStudentRepository studentRepository) : IRequestHandler<CreateStudentCommand>
 {
     public async Task<Result> HandleAsync(CreateStudentCommand request, CancellationToken cancellationToken = default)
     {
-        await validator.ValidateAndThrowAsync(request.Student, cancellationToken);
+        await validator.ValidateAndThrowAsync(request, cancellationToken);
 
         var entity = request.Student.Map();
-        
         var student = await studentRepository.CreateAsync(entity, cancellationToken);
 
         return Result.Success(student.Map());

@@ -10,7 +10,6 @@ public sealed class DeleteStudentByIdCommandHandler(IStudentRepository studentRe
     public async Task<Result> HandleAsync(DeleteStudentByIdCommand request, CancellationToken cancellationToken = default)
     {
         var student = await studentRepository.GetOneAsync(request.Id, cancellationToken);
-
         if (student == null) return Result.Failed(StudentError.NotFound(request.Id));
         
         await studentRepository.DeleteAsync(student, cancellationToken);

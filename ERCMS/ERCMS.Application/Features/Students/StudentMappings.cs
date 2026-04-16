@@ -36,6 +36,21 @@ public static class StudentMappings
         return entity;
     }
     
+    public static Student Map(Student destination, SaveStudentDto source)
+    {
+        destination.FirstName = source.FirstName;
+        destination.MiddleName = source.MiddleName;
+        destination.LastName = source.LastName;
+        destination.Gender = source.Gender;
+        destination.DateOfBirth = source.DateOfBirth;
+        destination.PhoneNumber = source.PhoneNumber;
+        destination.TelephoneNumber = source.TelephoneNumber;
+        destination.EmailAddress = source.EmailAddress;
+        destination.Address = source.Address;
+
+        return destination;
+    }
+    
     public static StudentDto Map(this Student entity)
     {
         var dto = new StudentDto

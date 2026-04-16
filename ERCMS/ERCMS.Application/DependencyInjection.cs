@@ -4,6 +4,7 @@ using ERCMS.Application.Features.Students.CreateStudent;
 using ERCMS.Application.Features.Students.DeleteStudentById;
 using ERCMS.Application.Features.Students.GetStudentById;
 using ERCMS.Application.Features.Students.GetStudents;
+using ERCMS.Application.Features.Students.UpdateStudent;
 using ERCMS.Application.Features.Users.GetUsers;
 using ERCMS.Application.Features.Users.LoginUser;
 using ERCMS.Application.Features.Users.RegisterUser;
@@ -56,6 +57,7 @@ public static class DependencyInjection
             services.AddScoped<IRequestHandler<GetStudentsQuery>, GetStudentsQueryHandler>();
             services.AddScoped<IRequestHandler<GetStudentByIdQuery>, GetStudentByIdQueryHandler>();
             services.AddScoped<IRequestHandler<CreateStudentCommand>, CreateStudentCommandHandler>();
+            services.AddScoped<IRequestHandler<UpdateStudentCommand>, UpdateStudentCommandHandler>();
             services.AddScoped<IRequestHandler<DeleteStudentByIdCommand>, DeleteStudentByIdCommandHandler>();
         }
 

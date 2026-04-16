@@ -5,14 +5,13 @@ using FluentValidation;
 
 namespace ERCMS.Application.Features.Users.RegisterUser;
 
-public sealed class RegisterUserCommandHandler(IValidator<RegisterUserDto> validator, IUserRepository userRepository) : IRequestHandler<RegisterUserCommand>
+public sealed class RegisterUserCommandHandler(IValidator<RegisterUserCommand> validator, IUserRepository userRepository) : IRequestHandler<RegisterUserCommand>
 {
     public async Task<Result> HandleAsync(RegisterUserCommand request, CancellationToken cancellationToken = default)
     {
-        await validator.ValidateAndThrowAsync(request.User, cancellationToken);
+        await validator.ValidateAndThrowAsync(request, cancellationToken);
         
         var entity = request.User.Map();
-        
         var user = await userRepository.CreateAsync(entity, cancellationToken);
 
         return Result.Success(user.Map());

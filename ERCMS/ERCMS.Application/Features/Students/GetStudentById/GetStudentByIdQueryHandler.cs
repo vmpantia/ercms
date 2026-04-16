@@ -10,7 +10,6 @@ public sealed class GetStudentByIdQueryHandler(IStudentRepository studentReposit
     public async Task<Result> HandleAsync(GetStudentByIdQuery request, CancellationToken cancellationToken = default)
     {
         var student = await studentRepository.GetOneAsync(request.Id, cancellationToken);
-
         if (student == null) return Result.Failed(StudentError.NotFound(request.Id));
 
         return Result.Success(student.Map());
